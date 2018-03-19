@@ -15,26 +15,46 @@ folderX/cfg/ScriptY.json
 import os.path
 import json
 
+
 # Read the configuration file. Just need to provide __file__ as parameter
 class Config(object):
-    def __init__(self, script_name=None):
-        # Process filename to get only filename without extension
-        filename = os.path.splitext(os.path.basename(script_name))[0]
+    # create: set True if the file needs to be created if doesn't exist
+    def __init__(self, script, create=False):
+        # Define config file name
+        cfg_file = os.path.splitext(os.path.basename(script))[0] + '.json'
 
-        # Import config file
-        config_file = os.path.join(os.path.dirname(os.path.dirname(\
-            os.path.abspath(__file__))), 'cfg/' + filename + '.json')
-        config_file = os.path.normpath(config_file)
+        # Define config dir
+        cfg_dir = os.path.join(os.path.dirname(os.path.abspath(script)), 'cfg')
 
+        # Define full path
+        cfg_file_path = os.path.join(cfg_dir, cfg_file)
+
+        self._file = cfg_file
+        self._dir = cfg_dir
+        self._file_path = cfg_file_path
+
+        if create:
+            self._create()
+
+    def read(self):
         # Read config file
         try:
-            with open(config_file, 'r') as f:
+            with open(self._file_path, 'r') as f:
                 config = json.load(f)
         except IOError as e:
-            print('cannot access config file %s' % config_file)
+            print('cannot access config file %s' % self._file_path)
             print(e)
-            exit(1)
+            raise
         else:
             # Define instance variables from dict
             for key, val in config.items():
                 setattr(self, key, val)
+
+    def _create(self):
+        if not os.path.exists(self._dir):
+            os.mkdir(self._dir)
+
+        if not os.path.exists(self._file_path):
+            cfg_data = {}
+            with open(self._file_path, 'w') as outfile:
+                json.dump(cfg_data, outfile)

@@ -3,10 +3,10 @@
 """
 import datetime
 from operator import itemgetter
-import gpm.config
+from gpm import config
 
 # Read config
-c = gpm.config.Config(script=__file__, create=True)
+c = config.Config(script=__file__, create=True)
 c.read()
 
 
