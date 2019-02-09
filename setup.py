@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='gpm',
-    version='0.0.2-alpha',
+    version='0.0.3-alpha',
     author='Vikram Chauhan',
     author_email='me@vkrm.ch',
     packages=['gpm'],

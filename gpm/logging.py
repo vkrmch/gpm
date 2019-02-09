@@ -30,13 +30,15 @@ class Log(object):
                  log_level=c.log_level,
                  logger_name=None,
                  rotating=False,
-                 console=True):
+                 console=True,
+                 log_entry_format_separator=c.log_entry_format_separator):
 
         # Define logger
         logger = get_logger(logger_name)
         logger.setLevel(log_level)
 
         # Define log format
+        c.log_entry_format.format(separator=log_entry_format_separator)
         formatter = logging.Formatter(c.log_entry_format,
                                       datefmt=c.log_date_format)
 
