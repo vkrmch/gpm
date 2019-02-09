@@ -1,0 +1,14 @@
+{
+  "ts_formats": {
+    "YYYYMMDDHHMISS": "%Y%m%d%H%M%S",
+    "YYYYMMDDHHMI": "%Y%m%d%H%M",
+    "YYYYMMDDHH": "%Y%m%d%H",
+    "YYYYMMDD": "%Y%m%d",
+    "YYYYMM": "%Y%m",
+    "YYYY": "%Y",
+    "hour_only": "%-I %p",
+    "day_hour_only": "%A %-I %p",
+    "day_only": "%A",
+    "date_time_footer": "%b %d, %Y at %-I:%M:%S %p"
+  }
+}

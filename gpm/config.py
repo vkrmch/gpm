@@ -19,12 +19,14 @@ import json
 # Read the configuration file. Just need to provide __file__ as parameter
 class Config(object):
     # create: set True if the file needs to be created if doesn't exist
-    def __init__(self, script, create=False):
+    def __init__(self, script, create=False, cfg_file=None, cfg_dir=None):
         # Define config file name
-        cfg_file = os.path.splitext(os.path.basename(script))[0] + '.json'
+        if cfg_file is None:
+            cfg_file = os.path.splitext(os.path.basename(script))[0] + '.json'
 
         # Define config dir
-        cfg_dir = os.path.join(os.path.dirname(os.path.abspath(script)), 'cfg')
+        if cfg_dir is None:
+            cfg_dir = os.path.join(os.path.dirname(os.path.abspath(script)), 'cfg')
 
         # Define full path
         cfg_file_path = os.path.join(cfg_dir, cfg_file)
