@@ -23,24 +23,25 @@ c.read()
 
 # Define log class
 class Log(object):
-    def __init__(self,
-                 script=None,
-                 tsformat=c.log_file_default_tsformat,
-                 keyword=None,
-                 log_level=c.log_level,
-                 logger_name=None,
-                 rotating=False,
-                 console=True,
-                 log_entry_format_separator=c.log_entry_format_separator):
+    def __init__(self, script=None, tsformat=None, keyword=None, log_level=None, logger_name=None, rotating=False,
+                 console=True, log_entry_format_separator=None):
 
         # Define logger
         logger = get_logger(logger_name)
         logger.setLevel(log_level)
 
+        if tsformat is None:
+            tsformat = c.log_file_default_tsformat
+
+        if log_level is None:
+            log_level = c.log_level
+
+        if log_entry_format_separator is None:
+            log_entry_format_separator = c.log_entry_format_separator
+
         # Define log format
-        c.log_entry_format.format(separator=log_entry_format_separator)
-        formatter = logging.Formatter(c.log_entry_format,
-                                      datefmt=c.log_date_format)
+        c.log_entry_format = c.log_entry_format.format(separator=log_entry_format_separator)
+        formatter = logging.Formatter(c.log_entry_format, datefmt=c.log_date_format)
 
         # Check if handlers are already added. If not add them
         # This avoids duplicate messages
@@ -60,8 +61,7 @@ class Log(object):
                 script_id = os.path.splitext(os.path.basename(script))[0]
 
                 # Define log dir
-                log_dir = os.path.join(os.path.dirname(os.path.abspath(script)),
-                                       'log', script_id)
+                log_dir = os.path.join(os.path.dirname(os.path.abspath(script)), 'log', script_id)
 
                 # Check if the folder exists and create if necessary
                 if not os.path.exists(log_dir):
@@ -81,9 +81,8 @@ class Log(object):
                     # timestamp for rotating logs
                     log_file = script_id + keyword + '.log'
                     log_file_path = os.path.join(log_dir, log_file)
-                    file = logging.handlers.RotatingFileHandler(log_file_path,
-                                            maxBytes=c.log_maxbytes,
-                                            backupCount=c.log_backupcount)
+                    file = logging.handlers.RotatingFileHandler(log_file_path, maxBytes=c.log_maxbytes,
+                                                                backupCount=c.log_backupcount)
                 else:
                     log_file = script_id + ts + keyword + '.log'
                     log_file_path = os.path.join(log_dir, log_file)
