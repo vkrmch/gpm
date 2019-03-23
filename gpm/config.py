@@ -40,17 +40,12 @@ class Config(object):
 
     def read(self):
         # Read config file
-        try:
-            with open(self._file_path, 'r') as f:
-                config = json.load(f)
-        except IOError as e:
-            print('cannot access config file %s' % self._file_path)
-            print(e)
-            raise
-        else:
-            # Define instance variables from dict
-            for key, val in config.items():
-                setattr(self, key, val)
+        with open(self._file_path, 'r') as f:
+            config = json.load(f)
+
+        # Define instance variables from dict
+        for key, val in config.items():
+            setattr(self, key, val)
 
     def _create(self):
         if not os.path.exists(self._dir):

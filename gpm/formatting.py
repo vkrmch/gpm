@@ -19,8 +19,7 @@ def time_now(ts_format=None):
 def time_specific(ts, ts_format=None):
     if ts_format is None:
         ts_format="YYYYMMDDHHMISS"
-    return datetime.datetime.fromtimestamp(int(ts)).strftime(
-        c.ts_formats.get(ts_format))
+    return datetime.datetime.fromtimestamp(int(ts)).strftime(c.ts_formats.get(ts_format))
 
 
 def fsize_pretty(size_in_bytes, return_size_only=False, unit=None):

@@ -26,10 +26,6 @@ class Log(object):
     def __init__(self, script=None, tsformat=None, keyword=None, log_level=None, logger_name=None, rotating=False,
                  console=True, log_entry_format_separator=None):
 
-        # Define logger
-        logger = get_logger(logger_name)
-        logger.setLevel(log_level)
-
         if tsformat is None:
             tsformat = c.log_file_default_tsformat
 
@@ -38,6 +34,10 @@ class Log(object):
 
         if log_entry_format_separator is None:
             log_entry_format_separator = c.log_entry_format_separator
+
+        # Define logger
+        logger = get_logger(logger_name)
+        logger.setLevel(log_level)
 
         # Define log format
         c.log_entry_format = c.log_entry_format.format(separator=log_entry_format_separator)
@@ -71,7 +71,7 @@ class Log(object):
                 # after the timestamp
                 if keyword:
                     # Strip characters that OS won't allow
-                    keyword = re.sub('[/\:?"|*]', '', keyword)
+                    keyword = re.sub('[/:?"|*]', '', keyword)
                     keyword = '_' + keyword
                 else:
                     keyword = ''
