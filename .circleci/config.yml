@@ -30,9 +30,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -q .tests/test_config.py
-            pytest -q .tests/test_formatting.py
-            pytest -q .tests/test_logging.py
+            pytest -q .tests/*.py
 
       - store_artifacts:
           path: test-reports
