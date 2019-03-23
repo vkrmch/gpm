@@ -132,4 +132,4 @@ def test_run_args_space_invalid():
     cmd = "ls -la " + path
     out = gpmos.run(cmd)
     remove_ls_folder(path)
-    assert out['returncode'] == 1
+    assert out['returncode'] > 0
