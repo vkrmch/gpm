@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/vikc07/gpm.svg?style=svg)](https://circleci.com/gh/vikc07/gpm)
+# current release
+`0.0.7a0`
 
 # gpm
 gpm provides wrapper functions that can be used for starting any python project
