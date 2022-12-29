@@ -44,6 +44,10 @@ def get_filename_wo_extension(file):
     return name
 
 
+def get_filename_only(file):
+    return os.path.basename(file)
+
+
 def run(cmd):
     cmd = shlex.split(cmd)
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())

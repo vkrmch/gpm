@@ -100,6 +100,11 @@ def test_get_filename_wo_extension():
     assert gpmos.get_filename_wo_extension(file) == 'maria.hey'
 
 
+def test_get_filename_only():
+    file = '/Users/maria/maria.hey.fine'
+    assert gpmos.get_filename_only(file) == 'maria.hey.fine'
+
+
 def test_get_filename_wo_extension_folder():
     file = '/Users/maria/maria/'
     assert gpmos.get_filename_wo_extension(file) is None

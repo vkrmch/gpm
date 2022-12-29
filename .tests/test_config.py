@@ -80,7 +80,7 @@ def test_custom_cfg_dir():
 
 def test_custom_cfg_dir_invalid():
     cfg_dir = '/config'
-    with pytest.raises(PermissionError):
+    with pytest.raises(OSError):
         c = config.Config(script=__file__, create=True, cfg_dir=cfg_dir)
 
 
