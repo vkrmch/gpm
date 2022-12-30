@@ -48,11 +48,28 @@ def get_filename_only(file):
     return os.path.basename(file)
 
 
-def run(cmd):
+# 0.0.8a0 introduces new changes
+def run(cmd, stream=False, logger=None):
     cmd = shlex.split(cmd)
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())
+    proc = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=os.environ.copy(),
+        encoding='utf8'
+    )
 
-    # surrogateescape fixes the decoding errors otherwise
-    stdout, stderr = [x.decode('utf-8', errors='surrogateescape') for x in proc.communicate()]
+    stdout = ""
 
-    return {'returncode': proc.returncode, 'stdout': stdout, 'stderr': stderr}
+    while True:
+        output = proc.stdout.readline().strip()
+        if output == '' and proc.poll() is not None:
+            break
+        if output:
+            stdout = '\n'.join([output, stdout])
+            if logger is not None:
+                logger.info(output)
+            if stream:
+                print(output)
+
+    return {'returncode': proc.returncode, 'stdout': stdout, 'stderr': stdout}
