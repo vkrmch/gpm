@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gpm',
-    version='0.0.7a0',
+    version='0.0.8a0',
     author='Vikram Chauhan',
     author_email='me@vkrm.ch',
     packages=find_packages(),
