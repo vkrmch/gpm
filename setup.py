@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='gpm',
-    version='0.0.8a0',
+    version='0.0.9',
     author='Vikram Chauhan',
-    author_email='me@vkrm.ch',
+    author_email='hello@vikramchauhan.com',
     packages=find_packages(),
     license='MIT',
-    url='https://github.com/vikc07/gpm',
+    url='https://github.com/vkrmch/gpm',
     description='gpm provides wrapper functions that can be used for starting any python project',
     package_data={
         'gpm': ['cfg/*.json']

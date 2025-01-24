@@ -2,7 +2,6 @@ import os
 import shlex
 import subprocess
 
-
 def ls(path, recursive=False, returnfilesonly=False):
     files = [os.path.join(path, file) for file in os.listdir(path)]
     if recursive:
@@ -73,3 +72,9 @@ def run(cmd, stream=False, logger=None):
                 print(output)
 
     return {'returncode': proc.returncode, 'stdout': stdout, 'stderr': stdout}
+
+# 0.0.9
+# returns the os.stat() as a dict
+def get_file_stats(file):
+    stats_object = os.stat(file)
+    return {k: getattr(stats_object, k) for k in dir(stats_object) if k.startswith('st_')}
