@@ -44,8 +44,12 @@ class Config(object):
             config = json.load(f)
 
         # Define instance variables from dict
-        for key, val in config.items():
+        items = config.items()
+        for key, val in items:
             setattr(self, key, val)
+
+        # return dict to allow usage of that
+        return items
 
     def _create(self):
         if not os.path.exists(self._dir):

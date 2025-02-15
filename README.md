@@ -1,7 +1,3 @@
-[![CircleCI](https://circleci.com/gh/vikc07/gpm.svg?style=svg)](https://circleci.com/gh/vikc07/gpm)
-# current release
-`0.0.8a0`
-
 # gpm
 gpm provides wrapper functions that can be used for starting any python project
 
@@ -13,6 +9,6 @@ gpm provides wrapper functions that can be used for starting any python project
 # usage
 Add the following to `requirements.txt`
 
-    git+https://github.com/vikc07/gpm.git#egg=gpm
+    git+https://github.com/vkrmch/gpm.git#egg=gpm
 
-or `run pip install git+https://github.com/vikc07/gpm.git#egg=gpm`
+or `run pip install git+https://github.com/vkrmch/gpm.git#egg=gpm`
