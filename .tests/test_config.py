@@ -51,6 +51,14 @@ def test_valid_config_variable():
     assert c.test
     remove_config_folder()
 
+def test_valid_config_variable_dict():
+    remove_config_folder()
+    c = config.Config(script=__file__, create=True)
+    prepare_config_file(c)
+    cfg = c.read()
+    assert cfg.get("test")
+    remove_config_folder()
+
 
 def test_create_file():
     remove_config_folder()
