@@ -24,13 +24,16 @@ c.read()
 # Define log class
 class Log(object):
     def __init__(self, script=None, tsformat=None, keyword=None, log_level=None, logger_name=None, rotating=False,
-                 console=True, log_entry_format_separator=None):
+                 console=True, log_entry_format_separator=None, log_entry_format=None):
 
         if tsformat is None:
             tsformat = c.log_file_default_tsformat
 
         if log_level is None:
             log_level = c.log_level
+
+        if log_entry_format is None:
+            log_entry_format = c.log_entry_format
 
         if log_entry_format_separator is None:
             log_entry_format_separator = c.log_entry_format_separator
@@ -40,8 +43,8 @@ class Log(object):
         logger.setLevel(log_level)
 
         # Define log format
-        c.log_entry_format = c.log_entry_format.format(separator=log_entry_format_separator)
-        formatter = logging.Formatter(c.log_entry_format, datefmt=c.log_date_format)
+        log_entry_format = log_entry_format.format(separator=log_entry_format_separator)
+        formatter = logging.Formatter(log_entry_format, datefmt=c.log_date_format)
 
         # Check if handlers are already added. If not add them
         # This avoids duplicate messages
